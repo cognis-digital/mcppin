@@ -81,4 +81,6 @@ python -m pytest tests/ -q
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+Cognis Open Collaboration License (COCL) 1.0 — a source-available license
+(free for non-commercial use; commercial use requires a separate license). See
+[LICENSE](LICENSE).
