@@ -24,6 +24,34 @@ tells you exactly what drifted — and for changed tools, whether the
 Part of the **Cognis Neural Suite** — 300+ source-available tools organized across 12 domains under the JTF MERIDIAN command structure. See the [suite on GitHub](https://github.com/cognis-digital) and [jtf-meridian](https://github.com/cognis-digital/jtf-meridian) for how the pieces fit together.
 <!-- cognis:domains:end -->
 
+## Usage — step by step
+
+`mcppin` fingerprints an MCP server's tool manifest (trust-on-first-use) and verifies later connections against that pin.
+
+1. **Install** (pure stdlib, Python 3.10+):
+   ```bash
+   pip install "git+https://github.com/cognis-digital/mcppin.git"
+   ```
+2. **Capture the manifest** you want to trust — export the server's `tools/list` result to `tools.json` (a bare array, or `{"tools": [...]}`).
+3. **Pin it on first approval** (writes to `~/.mcppin/pins.json`, override with `--store`):
+   ```bash
+   mcppin pin acme-mcp tools.json
+   ```
+4. **Verify a live manifest** on every later session; exit `1` on drift, `2` if not yet pinned (use `--tofu` to pin automatically the first time):
+   ```bash
+   mcppin verify acme-mcp tools.json
+   mcppin verify acme-mcp tools.json --tofu
+   ```
+5. **Inspect what's pinned** when you need to audit:
+   ```bash
+   mcppin list                 # pinned servers + tool counts
+   mcppin show acme-mcp        # per-tool fingerprints
+   ```
+6. **Gate CI** — `verify` returns non-zero on any added/removed/changed tool, so a drifted description or widened schema fails the pipeline:
+   ```bash
+   mcppin verify acme-mcp tools.json || { echo "MCP tool drift!"; exit 1; }
+   ```
+
 ## Install
 
 ```bash
