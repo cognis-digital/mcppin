@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "mcppin"
-version = "0.1.0"
+version = "0.1.1"
 description = "Trust-On-First-Use pinning and drift detection for MCP tool definitions"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -25,9 +25,11 @@ Homepage = "https://github.com/cognis-digital/mcppin"
 Issues = "https://github.com/cognis-digital/mcppin/issues"
 
 [project.scripts]
+"mcppin-emit" = "mcppin.connect:emit_main"
 mcppin = "mcppin.cli:main"
 
 [project.optional-dependencies]
+connect = ["cognis-connect @ git+https://github.com/cognis-digital/cognis-connect.git"]
 dev = ["pytest>=7"]
 
 [tool.hatch.build.targets.wheel]
