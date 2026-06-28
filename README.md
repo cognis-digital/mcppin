@@ -15,6 +15,61 @@ tells you exactly what drifted — and for changed tools, whether the
 **description** or the **inputSchema** moved.
 
 <!-- cognis:domains:start -->
+
+<!-- cognis:example:start -->
+## 🔎 Example output
+
+Real, reproducible output from the tool — runs offline:
+
+```console
+$ mcppin-emit --help
+usage: mcppin-emit [-h]
+                   --to {stix,taxii,misp,sigma,splunk,elastic,slack,discord,webhook,brief,findings}
+                   [--url URL] [--token TOKEN] [--dry-run]
+                   [input]
+
+forward mcppin JSON findings to a platform via cognis-connect
+
+positional arguments:
+  input                 findings JSON file (default: stdin)
+
+options:
+  -h, --help            show this help message and exit
+  --to {stix,taxii,misp,sigma,splunk,elastic,slack,discord,webhook,brief,findings}
+  --url URL
+  --token TOKEN
+  --dry-run
+```
+
+> Blocks above are real `mcppin` output — reproduce them from a clone.
+
+**Sample result format** _(illustrative values — run on your own data for real findings):_
+
+```
+{
+"Findings": [
+    {
+        "Id": "12345",
+        "Title": "Suspicious Network Traffic",
+        "Description": "Unusual network traffic detected from IP 192.168.1.100",
+        "Severity": "High",
+        "Confidence": 0.8,
+        "MITRE": ["T1190"]
+    },
+    {
+        "Id": "67890",
+        "Title": "Malware Detection",
+        "Description": "Malware detected on host with IP 192.168.1.101",
+        "Severity": "Medium",
+        "Confidence": 0.6,
+        "MITRE": ["T1059"]
+    }
+]
+}
+```
+
+<!-- cognis:example:end -->
+
 ## Domains
 
 **Primary domain:** AI & ML  ·  **JTF MERIDIAN division:** ATHENA-PRIME · SAGE
